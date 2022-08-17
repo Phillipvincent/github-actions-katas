@@ -7,8 +7,6 @@ jobs:
     steps:
       - name: Clone-down
         uses: actions/checkout@v2
-      - name: my-step
-        run: ci/build-app.sh 
       - name: Upload Repo
         uses: actions/upload-artifact@v2
         with:
@@ -19,10 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
     steps:
-      - name: test
-        run: ci/unit-test-app.sh
       - name: Download Repo
         uses: actions/download-artifact@v2
+      - name: my-step
+        run: ci/build-app.sh 
+      - name: test
+        run: ci/unit-test-app.sh
         with: 
           name: code
           path: .
